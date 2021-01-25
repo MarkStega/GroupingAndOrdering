@@ -54,12 +54,7 @@ namespace GroupingAndOrdering.Pages
 
         private IOrderedEnumerable<Person> OrderPeople(IEnumerable<Person> people, Direction direction) => direction == Direction.Ascending ? people.OrderBy(x => x.FamilyName) : people.OrderByDescending(x => x.FamilyName);
 
-        private IEnumerable<IGrouping<string, Person>> GroupMethod(IEnumerable<Person> people)
-        {
-            var result = people.GroupBy(x => x.Salutation);
-
-            return result;
-        }
+        private IEnumerable<IGrouping<string, Person>> GroupMethod(IEnumerable<Person> people) => people.GroupBy(x => x.Salutation);
 
         private IOrderedEnumerable<string> OrderSalutations(IEnumerable<string> salutations, Direction direction) => direction == Direction.Ascending ? salutations.OrderBy(x => x) : salutations.OrderByDescending(x => x);
 
