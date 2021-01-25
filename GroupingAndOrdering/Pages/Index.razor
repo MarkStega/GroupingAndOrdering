@@ -1,7 +1,61 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<h1 style="margin-bottom: 2rem;">Grouping and Ordering</h1>
 
-Welcome to your new app.
+<p>
+    <input type="checkbox" id="group-data" name="group-data" @bind="@GroupData">
+    <label for="group-data">Group Data?</label><br>
+</p>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<p>
+    <input type="checkbox" id="group-descending" name="group-descending" @bind="@GroupDescending">
+    <label for="group-descending">Order Groups Descending?</label><br>
+</p>
+
+<p>
+    <input type="checkbox" id="show-empty" name="show-empty" @bind="@ShowEmptyGroups">
+    <label for="show-empty">Show Empty Groups?</label><br>
+</p>
+
+<br />
+
+<p>
+    <input type="checkbox" id="items-descending" name="items-descending" @bind="@ItemsDescending">
+    <label for="items-descending">Order Items Descending?</label><br>
+</p>
+
+
+@if (GroupData)
+{
+    if (ShowEmptyGroups)
+    {
+        <NotQuiteGrid TItem="Person"
+                      TGroupKey="string"
+                      Items="@People"
+                      OrderItems="@OrderPeople"
+                      ItemsDirection="@(ItemsDescending ? Direction.Descending : Direction.Ascending)"
+                      GroupMethod="@GroupMethod"
+                      OrderGroupKeys="@OrderSalutations"
+                      GroupKeysDirection="@(GroupDescending ? Direction.Descending : Direction.Ascending)"
+                      GroupCategories="@Salutations" />
+    }
+    else
+    {
+        <NotQuiteGrid TItem="Person"
+                      TGroupKey="string"
+                      Items="@People"
+                      OrderItems="@OrderPeople"
+                      ItemsDirection="@(ItemsDescending ? Direction.Descending : Direction.Ascending)"
+                      GroupMethod="@GroupMethod"
+                      OrderGroupKeys="@OrderSalutations"
+                      GroupKeysDirection="@(GroupDescending ? Direction.Descending : Direction.Ascending)" />
+    }
+}
+else
+{
+    <NotQuiteGrid TItem="Person"
+                  TGroupKey="string"
+                  Items="@People"
+                  OrderItems="@OrderPeople"
+                  ItemsDirection="@(ItemsDescending ? Direction.Descending : Direction.Ascending)" />
+}

@@ -1,0 +1,25 @@
+﻿@typeparam TItem
+@typeparam TGroupKey
+
+
+@if (UngroupedItems != null)
+{
+    foreach (var item in UngroupedItems)
+    {
+        <p @key="@item">@item</p>
+    }
+}
+else
+{
+    foreach (var key in GroupKeys)
+    {
+        <p @key="@key"><strong>@key</strong></p>
+
+        @foreach (var item in GroupDict[key])
+        {
+            <p @key="@item" style="margin-left: 4rem;">@item</p>
+        }
+
+        <br />
+    }
+}
